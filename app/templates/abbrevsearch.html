@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Abbreviations</title>
+</head>
+<body>
+    <h1>Search Abbreviations</h1>
+    <form method="POST">
+        <label for="search_term">Enter abbreviation to search:</label>
+        <input type="text" id="search_term" name="search_term">
+        <input type="submit" value="Search">
+    </form>
+
+    <h2>Search Results:</h2>
+    <ul>
+        {% for key, value in search_results.items() %}
+            <li>{{ key }}: {{ value }}</li>
+        {% else %}
+            <li>No results found</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+{% endblock %}

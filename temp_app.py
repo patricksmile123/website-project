@@ -1,7 +1,7 @@
 from flask import Flask
 from math import isqrt
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, validators
 
 
 class LoginForm(FlaskForm):
@@ -9,6 +9,17 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password')
     submit = SubmitField('Sign In')
     pass
+
+
+class SignupForm(FlaskForm):
+    username = StringField('Username')
+    email = StringField('Email Address')
+    password = PasswordField('New Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Repeat Password')
+    submit = SubmitField('Sign Up')
 
 
 def is_prime(n: int) -> bool:
@@ -21,4 +32,3 @@ def is_prime(n: int) -> bool:
         if n % i == 0 or n % (i + 2) == 0:
             return False
     return True
-

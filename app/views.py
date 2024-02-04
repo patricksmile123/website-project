@@ -1,7 +1,8 @@
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from app import app
 from datetime import datetime
 import random
+from temp_app import LoginForm, SignupForm
 
 
 @app.route('/')
@@ -79,3 +80,19 @@ def abbrevsearch():
         if search_term in abbreviation.lower():
             search_results[abbreviation] = full_form
     return render_template('abbrevsearch.html', search_results=search_results)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect(url_for('index'))
+    return render_template('login.html', title='Sign In', form=form)
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        return redirect(url_for('index'))
+    return render_template('login.html', title='Sign Up', form=form)

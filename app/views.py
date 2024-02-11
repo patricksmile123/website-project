@@ -95,4 +95,4 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         return redirect(url_for('index'))
-    return render_template('login.html', title='Sign Up', form=form)
+    return render_template('signup.html', title='Sign Up', form=form)
